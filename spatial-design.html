@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spatial Design — QOMO</title>
+  <meta name="description" content="Selected spatial work by QOMO.">
+  <meta name="theme-color" content="#48531D">
+  <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..700&family=Waiting+for+the+Sunrise&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="spatial">
+  <div data-include="header"></div>
+
+  <main class="arc">
+    <div class="wrap arc-bar">
+      <div class="arc-index">
+        <span class="dot" aria-hidden="true"></span>
+        <span>SELECTED SPATIAL Work</span>
+        <span class="slash" aria-hidden="true">/</span>
+        <span class="count" aria-live="polite">01 — 04</span>
+      </div>
+      <div class="toggle" role="group" aria-label="View mode">
+        <button type="button" data-mode="immersive" aria-pressed="true">Immersive</button>
+        <button type="button" data-mode="grid" aria-pressed="false">Grid</button>
+      </div>
+    </div>
+
+    <section class="reel" aria-roledescription="carousel" aria-label="Selected spatial work">
+      <div class="reel__viewport">
+        <div class="reel__track">
+          <div class="reel__item" role="button" tabindex="0" data-project="quiet" aria-label="Project 01"><img src="assets/img/arc-01.jpg" alt="" draggable="false"></div>
+          <div class="reel__item" role="button" tabindex="0" aria-label="Project 02"><img src="assets/img/arc-02.jpg" alt="" draggable="false"></div>
+          <div class="reel__item" role="button" tabindex="0" data-project="atrium" aria-label="Project 03"><img src="assets/img/arc-03.jpg" alt="" draggable="false"></div>
+          <div class="reel__item" role="button" tabindex="0" aria-label="Project 04"><img src="assets/img/arc-04.jpg" alt="" draggable="false"></div>
+        </div>
+      </div>
+      <div class="reel__caption">
+        <h2>Quiet Residence</h2>
+        <p>RAMMED EARTH &amp; CANTILEVERED PAVILION | KYOTO — 2025</p>
+        <div class="reel__controls">
+          <button class="reel__prev" type="button" aria-label="Previous project"><img src="assets/img/arrow-prev.svg" alt="" width="16.67" height="11.67"></button>
+          <div class="progress" aria-hidden="true"><span></span></div>
+          <button class="reel__next" type="button" aria-label="Next project"><img src="assets/img/arrow-next.svg" alt="" width="16.67" height="11.67"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap arc-grid" aria-label="Selected spatial work — grid">
+      <button type="button" data-project="quiet"><span class="thumb"><img src="assets/img/arc-01.jpg" alt="" loading="lazy"></span><span class="num">01</span></button>
+      <button type="button"><span class="thumb"><img src="assets/img/arc-02.jpg" alt="" loading="lazy"></span><span class="num">02</span></button>
+      <button type="button" data-project="atrium"><span class="thumb"><img src="assets/img/arc-03.jpg" alt="" loading="lazy"></span><span class="num">03</span></button>
+      <button type="button"><span class="thumb"><img src="assets/img/arc-04.jpg" alt="" loading="lazy"></span><span class="num">04</span></button>
+    </section>
+  </main>
+
+  <!-- Project description overlay -->
+  <div class="overlay" role="dialog" aria-modal="true" aria-label="Project description">
+    <div class="overlay__card">
+      <button class="overlay__close" type="button" aria-label="Close"><span></span><span></span></button>
+      <div class="overlay__main"><img src="assets/img/quiet-main.jpg" alt=""></div>
+      <div class="overlay__thumbs"></div>
+      <dl class="spec">
+        <div><dt>TYPOLOGY</dt><dd></dd></div>
+        <div><dt>Build area</dt><dd></dd></div>
+        <div><dt>LOCATION</dt><dd></dd></div>
+        <div class="scope"><dt>Scope</dt><dd></dd></div>
+      </dl>
+      <a class="view-full" href="#" style="width:max-content">VIEW FULL PORTFOLIO</a>
+      <div class="overlay__strip"></div>
+    </div>
+  </div>
+
+  <div data-include="footer"></div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

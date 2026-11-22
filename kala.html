@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalā — QOMO</title>
+  <meta name="description" content="A study of three realms where light, life, and earth meet.">
+  <meta name="theme-color" content="#48531D">
+  <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..700&family=Waiting+for+the+Sunrise&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="kala">
+  <div data-include="header"></div>
+
+  <main>
+    <section class="kala-hero">
+      <div class="kala-hero__bg"><img src="assets/img/kala-hero.gif" alt="" data-parallax="-0.12"></div>
+      <div class="wrap">
+        <h1 class="reveal">
+          <span class="one">one with</span>
+          <span class="kala">Kalā</span>
+        </h1>
+        <p class="reveal">A study of three realms where light, life, and earth meet.</p>
+      </div>
+    </section>
+
+    <section class="kala-intro">
+      <div class="wrap">
+        <h2 class="reveal">Scroll through, and find your light...</h2>
+      </div>
+    </section>
+
+    <section class="realms" aria-label="Three realms">
+      <article class="realm" id="sun-sky">
+        <div class="realm__bg"><img src="assets/img/kala-sun-sky.gif" alt="" loading="lazy"></div>
+        <h2>the sun &amp; sky</h2>
+      </article>
+      <article class="realm" id="forest-floor">
+        <div class="realm__bg"><video src="assets/video/forest-floor.mp4" poster="assets/img/kala-forest-floor.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+        <h2>the forest floor</h2>
+      </article>
+      <article class="realm realm--terrain" id="terrain">
+        <div class="realm__bg"><video src="assets/video/terrain.mp4" poster="assets/img/kala-terrain.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+        <h2>the terrain</h2>
+      </article>
+    </section>
+
+    <section class="translate">
+      <div class="wrap">
+        <div class="translate__grid">
+          <div class="translate__q reveal">
+            <p>Want to see spatial translation?</p>
+            <p class="yn"><a href="spatial-design.html">yes</a> <span aria-hidden="true">&nbsp;/&nbsp;</span> <a href="#directory">no</a></p>
+          </div>
+        </div>
+      </div>
+      <nav class="directory wrap stagger" id="directory" aria-label="Kalā directory">
+        <a class="reveal" href="things.html">Works &amp; Directory <span class="arr">→</span></a>
+        <a class="reveal" href="enquire.html">Commissioned Pieces <span class="arr">→</span></a>
+        <a class="reveal" href="practice.html#gallery">Non-confirmative Exporsures <span class="arr">→</span></a>
+      </nav>
+    </section>
+  </main>
+
+  <div data-include="footer"></div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
