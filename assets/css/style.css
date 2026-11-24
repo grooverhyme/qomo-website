@@ -830,3 +830,128 @@ body.menu-open { overflow: hidden; }
 a.card__media { display: block; }
 .store__index .row { position: relative; }
 .row__link { position: absolute; inset: 0; }
+
+/* ==========================================================================
+   NAV BAR — Figma "PAGE ELEMENTS / NAV BAR" 320:1503
+   SPATIAL DESIGN · Kalā in regular grey; ABOUT · SHOP · enquire in medium black
+   ========================================================================== */
+.nav a:nth-child(n+3) { color: var(--ink); font-weight: 500; }
+.brand__mark { display: block; border-radius: 50%; }
+.brand__mark:hover img { transform: rotate(-12deg) scale(1.05); }
+
+/* ==========================================================================
+   Cyanotype — Figma "QOMO Cyanotype Gallery" 322:2995 (Sun & Sky)
+   Cyanotype blue + paper are the prints' own colours
+   ========================================================================== */
+.cy {
+  --cy-blue: #092e72;
+  --cy-blue-deep: #073766;
+  --cy-sky: #a2cada;
+  --cy-paper: #f5f2df;
+  --cy-ink: #1c2e22;
+}
+.cy-eyebrow, .cy-pill, .cy-hero__fine, .cy-print__cap .n, .cy-print__cap .y, .cy-index__close, .cy-index__nav .n {
+  font-family: "Outfit", var(--font); font-weight: 400; text-transform: uppercase;
+}
+.cy-pill {
+  display: inline-flex; align-items: center; padding: 10px 15px; border: 1px solid rgba(245, 242, 223, .6); border-radius: 999px;
+  font-size: 10px; line-height: 15px; letter-spacing: .06em; color: var(--cy-paper); text-transform: none;
+  transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+}
+.cy-pill:hover { background: var(--cy-paper); color: var(--cy-ink); border-color: var(--cy-paper); }
+.cy-pill--solid { background: var(--cy-paper); color: var(--cy-ink); }
+.cy-pill--solid:hover { background: transparent; color: var(--cy-paper); border-color: rgba(245, 242, 223, .6); }
+
+/* Hero */
+.cy-hero {
+  position: relative; overflow: hidden; display: flex; align-items: flex-end;
+  min-height: clamp(560px, 56.3vw, 100svh); color: var(--cy-paper);
+}
+.cy-hero__bg { position: absolute; left: 0; top: -6%; width: 100%; height: 112%; object-fit: cover; }
+.cy-hero__shade {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(245, 243, 224, .23) 0%, rgba(245, 243, 224, 0) 29%),
+    linear-gradient(0deg, rgba(15, 34, 24, .42) 0%, rgba(15, 34, 24, 0) 43%),
+    linear-gradient(90deg, rgba(20, 31, 21, .15) 0%, rgba(20, 31, 21, 0) 30%),
+    rgba(0, 0, 0, .19);
+}
+.cy-hero__text {
+  position: relative; width: 100%; max-width: 662px;
+  padding: 0 var(--gutter) clamp(64px, 5.6vw, 72px) clamp(20px, 5.9vw, 75px);
+}
+.cy-eyebrow { padding-left: 4px; font-size: 9px; line-height: 13.5px; letter-spacing: .18em; }
+.cy-hero h1 { padding-top: 7px; font-weight: 200; font-size: clamp(54px, 5.9vw, 76px); line-height: .78; letter-spacing: -.075em; }
+.cy-hero h1 span { display: block; }
+.cy-hero__lede { max-width: 290px; padding-top: 25px; font-weight: 400; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.1; }
+.cy-hero__cta { display: flex; gap: 9px; padding-top: 14px; }
+.cy-hero__fine { position: absolute; left: 20px; bottom: 18px; font-size: 8px; line-height: 12px; letter-spacing: .08em; color: rgba(245, 242, 223, .7); }
+
+/* Statement */
+.cy-statement { padding: clamp(80px, 10vw, 140px) var(--gutter) clamp(24px, 4vw, 60px); }
+.cy-statement h2 {
+  max-width: 1076px; margin: 0 auto; font-weight: 200; color: var(--cy-sky);
+  font-size: clamp(34px, 5vw, 64px); line-height: 1; letter-spacing: -.01em;
+}
+.cy-statement em {
+  font-family: Georgia, "Times New Roman", serif; font-style: normal; font-weight: 400;
+  background: linear-gradient(192deg, var(--cy-sky) 67.7%, var(--cy-blue-deep) 110.4%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Gallery — staggered positions from the 1280 frame, as % of the content width */
+.cy-gallery { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter); box-sizing: content-box; }
+.cy-print { position: relative; width: 36.04%; }
+.cy-print--1 { margin-top: 14.38%; }
+.cy-print--2 { margin-left: 61.17%; margin-top: -23.52%; }
+.cy-print--3 { margin-left: .86%; margin-top: 3.59%; }
+.cy-print--4 { margin-left: 50%; margin-top: -27.27%; }
+.cy-print--5 { margin-left: 2.97%; margin-top: 6.95%; width: 27.03%; }
+.cy-print--6 { margin-left: 47.19%; margin-top: -15.47%; width: 45.05%; margin-bottom: 29.22%; }
+.cy-print__btn { display: block; width: 100%; aspect-ratio: 1; overflow: hidden; box-shadow: 0 16px 45px rgba(30, 34, 29, .08); cursor: zoom-in; }
+.cy-print__btn img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease-out); }
+.cy-print__btn:hover img { transform: scale(1.04); }
+.cy-print__cap { position: relative; display: flex; align-items: baseline; gap: 27px; padding-top: 10px; color: var(--ink-85); }
+.cy-print__cap .n, .cy-print__cap .y { font-size: 8px; line-height: 12px; letter-spacing: .06em; }
+.cy-print__cap .t { font-weight: 400; font-size: 10px; line-height: 15px; }
+.cy-print__cap .y { margin-left: auto; }
+
+@media (max-width: 700px) {
+  .cy-gallery { padding: 32px var(--gutter) 96px; }
+  .cy-print, .cy-print--1, .cy-print--5, .cy-print--6 { width: 84%; margin: 0; }
+  .cy-print + .cy-print { margin-top: 56px; }
+  .cy-print:nth-child(even) { margin-left: auto; }
+}
+
+/* Index panel — slides down over the page from the logomark */
+.cy-index { position: fixed; inset: 0; z-index: 150; background: rgba(9, 46, 114, 0); transition: background .6s var(--ease); }
+.cy-index.is-open { background: rgba(9, 46, 114, .18); }
+.cy-index__panel {
+  position: absolute; left: 0; top: 0; display: flex; flex-direction: column;
+  width: min(682px, 100%); height: 100%; padding: 20px; background: var(--cy-blue); color: #f3f0dc;
+  transform: translateY(-102%); transition: transform .7s var(--ease-out);
+}
+.cy-index.is-open .cy-index__panel { transform: none; }
+.cy-index__top { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 25px; border-bottom: 1px solid rgba(255, 255, 255, .24); }
+.cy-index__word { font-weight: 400; font-size: 26px; line-height: 39px; letter-spacing: -.07em; }
+.cy-index__close { padding: 11px 18px; border: 1px solid rgba(255, 255, 255, .5); border-radius: 999px; font-size: 9px; line-height: 13.5px; letter-spacing: .1em; color: #f3f0dc; transition: background .3s, color .3s; }
+.cy-index__close:hover { background: #f3f0dc; color: var(--cy-blue); }
+.cy-index__nav { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.cy-index__nav a {
+  display: flex; gap: 25px; align-items: flex-start; padding-block: 8px;
+  font-weight: 200; font-size: clamp(52px, 6.1vw, 78px); line-height: .9; letter-spacing: -.075em;
+  opacity: 0; transform: translateY(-16px); transition: opacity .5s var(--ease), transform .7s var(--ease-out), color .3s;
+}
+.cy-index.is-open .cy-index__nav a { opacity: 1; transform: none; }
+.cy-index.is-open .cy-index__nav a:nth-child(1) { transition-delay: .18s; }
+.cy-index.is-open .cy-index__nav a:nth-child(2) { transition-delay: .26s; }
+.cy-index.is-open .cy-index__nav a:nth-child(3) { transition-delay: .34s; }
+.cy-index__nav a:hover { color: var(--cy-sky); }
+.cy-index__nav .n { padding-top: 13px; font-size: 9px; line-height: 8px; letter-spacing: 0; }
+.cy-index__foot { display: flex; gap: 30px; font-weight: 400; font-size: 11px; line-height: 16.5px; }
+.cy-index__foot a { text-decoration: underline; text-underline-offset: 2px; }
+body.index-open { overflow: hidden; }
+
+/* Kalā — Sun & Sky realm opens the cyanotype page */
+.realm h2 a { transition: color .4s var(--ease); }
+.realm h2 a:hover { color: var(--cy-sky, #a2cada); }

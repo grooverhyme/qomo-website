@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Botanical blueprints — QOMO</title>
+  <meta name="description" content="Original cyanotype prints made slowly by hand, exposed under the open sky.">
+  <meta name="theme-color" content="#092e72">
+  <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..700&family=Waiting+for+the+Sunrise&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="kala" class="cy">
+  <div data-include="header"></div>
+
+  <!-- Figma "QOMO Cyanotype Gallery" 322:2995 — index panel ("Sidebar" 322:3177), opened from the logomark -->
+  <div class="cy-index" id="page-index" role="dialog" aria-modal="true" aria-label="Cyanotype index" hidden>
+    <div class="cy-index__panel">
+      <div class="cy-index__top">
+        <span class="cy-index__word">QOMO°</span>
+        <button class="cy-pill cy-index__close" type="button">Close</button>
+      </div>
+      <nav class="cy-index__nav" aria-label="Cyanotype index">
+        <a href="#collection"><span class="n">01</span>Collection</a>
+        <a href="#process"><span class="n">02</span>Process</a>
+        <a href="practice.html"><span class="n">03</span>Studio</a>
+      </nav>
+      <div class="cy-index__foot">
+        <span>For enquiries</span>
+        <a href="mailto:studio@qomo.art">studio@qomo.art</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="cy-hero" aria-labelledby="cy-title">
+      <img class="cy-hero__bg" src="assets/img/cyano-hero.jpg" alt="" data-parallax="-0.08">
+      <div class="cy-hero__shade" aria-hidden="true"></div>
+      <div class="cy-hero__text">
+        <p class="cy-eyebrow reveal">SUn &amp; SKY</p>
+        <h1 id="cy-title" class="reveal"><span>Botanical</span> <span>blueprints.</span></h1>
+        <p class="cy-hero__lede reveal">Original cyanotype prints made slowly by hand, exposed under the open sky.</p>
+        <div class="cy-hero__cta reveal">
+          <a class="cy-pill cy-pill--solid" href="#collection">View collection</a>
+          <a class="cy-pill" href="practice.html">The studio</a>
+        </div>
+      </div>
+      <small class="cy-hero__fine">© QOMO 2025</small>
+    </section>
+
+    <section class="cy-statement" id="process" aria-label="Process">
+      <h2 class="reveal">Works exposed beneath the open sky and <em>washed by hand in the garden.</em></h2>
+    </section>
+
+    <section class="cy-gallery" id="collection" aria-label="Cyanotype collection" data-lightbox>
+      <article class="cy-print cy-print--1 reveal">
+        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Queen Anne’s Lace I"><img src="assets/img/cyano-01.jpg" alt="Queen Anne’s Lace I" width="512" height="512" loading="lazy"></button>
+        <p class="cy-print__cap"><span class="n">01</span><span class="t">Queen Anne’s Lace I</span><span class="y">2025</span></p>
+      </article>
+      <article class="cy-print cy-print--2 reveal">
+        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Fern Study No. 3"><img src="assets/img/cyano-02.jpg" alt="Fern Study No. 3" width="512" height="512" loading="lazy"></button>
+        <p class="cy-print__cap"><span class="n">02</span><span class="t">Fern Study No. 3</span><span class="y">2025</span></p>
+      </article>
+      <article class="cy-print cy-print--3 reveal">
+        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Garden After Rain"><img src="assets/img/cyano-03.jpg" alt="Garden After Rain" width="512" height="512" loading="lazy"></button>
+        <p class="cy-print__cap"><span class="n">03</span><span class="t">Garden After Rain</span><span class="y">2024</span></p>
+      </article>
+      <article class="cy-print cy-print--4 reveal">
+        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Wild Grasses"><img src="assets/img/cyano-04.jpg" alt="Wild Grasses" width="512" height="512" loading="lazy"></button>
+        <p class="cy-print__cap"><span class="n">04</span><span class="t">Wild Grasses</span><span class="y">2025</span></p>
+      </article>
+      <article class="cy-print cy-print--5 reveal">
+        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Cosmos, Late August"><img src="assets/img/cyano-05.jpg" alt="Cosmos, Late August" width="512" height="512" loading="lazy"></button>
+        <p class="cy-print__cap"><span class="n">05</span><span class="t">Cosmos, Late August</span><span class="y">2024</span></p>
+      </article>
+      <article class="cy-print cy-print--6 reveal">
+        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Meadow Fragment II"><img src="assets/img/cyano-06.jpg" alt="Meadow Fragment II" width="512" height="512" loading="lazy"></button>
+        <p class="cy-print__cap"><span class="n">06</span><span class="t">Meadow Fragment II</span><span class="y">2025</span></p>
+      </article>
+    </section>
+  </main>
+
+  <div data-include="mega" data-variant="grass"></div>
+  <div data-include="footer"></div>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

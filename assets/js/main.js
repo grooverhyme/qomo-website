@@ -17,7 +17,7 @@
   const NAV = [
     ["spatial", "spatial-design.html", "SPATIAL DESIGN"],
     ["kala", "kala.html", "Kalā"],
-    ["practice", "practice.html", "practice"],
+    ["practice", "practice.html", "ABOUT"],
     ["shop", "shop.html", "SHOP"],
     ["enquire", "enquire.html", "enquire"],
   ];
@@ -26,14 +26,22 @@
       `<a href="${href}"${page === k ? ' aria-current="page"' : ""}>${label}</a>`).join("");
 
   const headerSlot = $("[data-include='header']");
+  // Pages with an index panel (Figma: logomark is a button there) open it from the mark
+  const hasIndex = !!$("#page-index");
+  const brand = hasIndex
+    ? `<div class="brand">
+            <button class="brand__mark" type="button" aria-label="Open index" aria-expanded="false" aria-controls="page-index"><img src="${IMG}logo-mark.png" alt="" width="43" height="42"></button>
+            <a href="index.html" aria-label="QOMO — home"><span>QOMO</span></a>
+          </div>`
+    : `<a class="brand" href="index.html" aria-label="QOMO — home">
+            <img src="${IMG}logo-mark.png" alt="" width="43" height="42">
+            <span>QOMO</span>
+          </a>`;
   if (headerSlot) {
     headerSlot.outerHTML = `
       <header class="site-header" id="top">
         <div class="wrap">
-          <a class="brand" href="index.html" aria-label="QOMO — home">
-            <img src="${IMG}logo-mark.png" alt="" width="43" height="42">
-            <span>QOMO</span>
-          </a>
+          ${brand}
           <nav class="nav" aria-label="Primary">${navLinks()}</nav>
           <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
         </div>
@@ -89,7 +97,7 @@
               <h4>FLow State</h4>
               <ul>
                 <li><a href="kala.html">Cosmos</a></li>
-                <li><a href="kala.html#sun-sky">Sun &amp; Sky</a></li>
+                <li><a href="cyanotype.html">Sun &amp; Sky</a></li>
                 <li><a href="kala.html#forest-floor">Forest Floor</a></li>
                 <li><a href="kala.html#terrain">The Terrain</a></li>
               </ul>
@@ -190,6 +198,36 @@
     toggle.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
     addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
     $$(".mobile-menu a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  }
+
+  /* ------------------------------------------------------------------
+     Page index panel (Cyanotype: Figma "Sidebar" 322:3177) —
+     slides down from the top when the logomark is pressed
+     ------------------------------------------------------------------ */
+  const pageIndex = $("#page-index");
+  const markBtn = $(".brand__mark");
+  if (pageIndex && markBtn) {
+    let closeTimer = 0;
+    const setIndex = (open) => {
+      clearTimeout(closeTimer);
+      markBtn.setAttribute("aria-expanded", String(open));
+      if (open) {
+        pageIndex.hidden = false;
+        requestAnimationFrame(() => requestAnimationFrame(() => pageIndex.classList.add("is-open")));
+        document.body.classList.add("index-open");
+        $(".cy-index__close", pageIndex).focus();
+      } else {
+        pageIndex.classList.remove("is-open");
+        document.body.classList.remove("index-open");
+        closeTimer = setTimeout(() => { pageIndex.hidden = true; }, reduce ? 0 : 700);
+        markBtn.focus({ preventScroll: true });
+      }
+    };
+    markBtn.addEventListener("click", () => setIndex(!pageIndex.classList.contains("is-open")));
+    $(".cy-index__close", pageIndex).addEventListener("click", () => setIndex(false));
+    pageIndex.addEventListener("click", (e) => { if (e.target === pageIndex) setIndex(false); });
+    $$("a", pageIndex).forEach((a) => a.addEventListener("click", () => setIndex(false)));
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && pageIndex.classList.contains("is-open")) setIndex(false); });
   }
 
   /* ------------------------------------------------------------------
