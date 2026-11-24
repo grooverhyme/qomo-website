@@ -728,3 +728,105 @@ body.menu-open { overflow: hidden; }
 /* keep the portrait's rounded corners through the reveal clip */
 .portrait.img-reveal { clip-path: inset(12% 0 12% 0 round 31px); }
 .portrait.img-reveal.is-in { clip-path: inset(0 0 0 0 round 31px); }
+
+/* ==========================================================================
+   Product page — Figma "QOMO PRODUCT PAGE" 312:338 (STAMP DUTY)
+   Content column 1379.5 / 1440; figure widths kept as ratios of it
+   ========================================================================== */
+.pdp { padding-top: var(--header-h); }
+.pdp__wrap {
+  --pdp-gutter: clamp(16px, 2.1vw, 30.24px);
+  --pdp-gap: clamp(40px, 5.3vw, 76px);
+  width: 100%; max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pdp-gutter);
+  display: flex; flex-direction: column; gap: var(--pdp-gap);
+}
+.pdp-bar, .pdp-fig figcaption, .pdp-next__label, .pdp-details__eyebrow, .pdp-spec dt {
+  font-family: "Outfit", var(--font); font-weight: 400; text-transform: uppercase; color: var(--ink-85);
+}
+
+/* Sub-bar: back link + code */
+.pdp-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 16px clamp(0px, 4.6vw, 64px) 16px clamp(0px, 2.5vw, 36px);
+  border-bottom: 1px solid var(--ink-18);
+  font-size: 10.4px; line-height: 15.6px; letter-spacing: .1em;
+}
+.pdp-back { display: inline-flex; align-items: center; gap: 12px; text-transform: none; transition: color .3s; }
+.pdp-back img { width: 19.1953px; height: 19.1953px; transform: rotate(180deg); transition: transform .5s var(--ease); }
+.pdp-back:hover { color: var(--olive); }
+.pdp-back:hover img { transform: rotate(180deg) translateX(4px); }
+
+/* Intro: title + specification list */
+.pdp-intro {
+  display: grid; grid-template-columns: minmax(0, 404fr) minmax(0, 877fr); column-gap: clamp(32px, 6.2vw, 89px);
+  align-items: end; padding-top: clamp(24px, 9vw, 129px); padding-bottom: 20px;
+}
+.pdp-intro__text { display: flex; flex-direction: column; gap: 12px; }
+.pdp-title, .pdp-details__title { font-weight: 200; color: var(--ink-85); }
+.pdp-title span, .pdp-details__title span { display: block; }
+.pdp-title { font-size: clamp(56px, 8.5vw, 122.4px); line-height: .82; letter-spacing: -.05em; }
+.pdp-intro__text p { max-width: 345px; font-family: "Outfit", var(--font); font-weight: 400; font-size: clamp(15px, 1.15vw, 16.56px); line-height: 1.5; color: var(--ink-85); }
+.pdp-spec { margin: 0; border-top: 1px solid var(--ink-18); }
+.pdp-spec > div {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 32px; align-items: center;
+  min-height: 60px; padding: 19.2px 0; border-bottom: 1px solid var(--ink-18);
+}
+.pdp-spec dt { font-size: 9.92px; line-height: 14.88px; letter-spacing: .12em; color: var(--ink-55); }
+.pdp-spec dd { margin: 0; font-family: "Outfit", var(--font); font-weight: 400; font-size: 13.76px; line-height: 20.64px; color: var(--ink-85); }
+.pdp-spec small { display: block; font-size: 11.52px; line-height: 17.28px; color: var(--ink-55); }
+
+/* Figures */
+.pdp-fig { margin: 0; width: 100%; }
+.pdp-fig__media { position: relative; background: var(--olive-tint-10); }
+.pdp-fig__media img, .pdp-fig__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pdp-fig figcaption {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 11.2px 0 24px; background: var(--olive-tint-10);
+  font-size: 9.6px; line-height: 14.4px; letter-spacing: .11em;
+}
+.pdp-fig--film .pdp-fig__media { aspect-ratio: 1379.5 / 776; }
+.pdp-fig--v1 { width: 68%; align-self: center; margin-block: clamp(0px, 7.8vw, 112px); }
+.pdp-fig--v1 .pdp-fig__media { aspect-ratio: 938 / 942; max-height: 942px; }
+.pdp-fig--v2 .pdp-fig__media { aspect-ratio: 1379.5 / 862.2; max-height: 942px; }
+.pdp-fig--v3 { width: 54%; align-self: flex-end; margin-block: clamp(0px, 8.9vw, 128px); }
+.pdp-fig--v3 .pdp-fig__media { aspect-ratio: 745 / 931; max-height: 942px; }
+.pdp-fig--v4 { width: 73%; align-self: center; margin-top: clamp(0px, 2.2vw, 32px); margin-bottom: clamp(0px, 10vw, 144px); }
+.pdp-fig--v4 .pdp-fig__media { aspect-ratio: 1007 / 805.6; max-height: 942px; }
+
+/* Artwork details */
+.pdp-details {
+  display: grid; grid-template-columns: minmax(0, 438.5fr) minmax(0, 877fr); column-gap: 64px;
+  padding-block: clamp(64px, 8.9vw, 128px); border-top: 1px solid var(--ink-18);
+}
+.pdp-details__eyebrow { font-size: 10.56px; line-height: 13.728px; letter-spacing: .15em; }
+.pdp-details__title { padding-top: 16px; font-size: clamp(48px, 5.5vw, 79.2px); line-height: .9; }
+
+/* Next work */
+.pdp-next {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  padding-block: clamp(40px, 4.4vw, 64px); border-bottom: 1px solid var(--ink-18);
+}
+.pdp-next__label { font-size: 10.4px; line-height: 15.6px; letter-spacing: .1em; }
+.pdp-next__link {
+  display: inline-flex; align-items: center; gap: 24px;
+  font-size: clamp(34px, 4vw, 57.6px); line-height: 1.5; letter-spacing: -.03em; font-weight: 200; color: var(--ink-85);
+  transition: color .4s var(--ease);
+}
+.pdp-next__link img { width: 21.5938px; height: 21.5938px; transition: transform .5s var(--ease); }
+.pdp-next__link:hover { color: var(--olive); }
+.pdp-next__link:hover img { transform: translateX(8px); }
+
+@media (max-width: 900px) {
+  .pdp-intro { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+  .pdp-details { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .pdp-fig--v1, .pdp-fig--v3, .pdp-fig--v4 { width: 100%; }
+  .pdp-spec > div { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: 16px; }
+  .pdp-next { flex-direction: column; align-items: flex-start; }
+}
+
+/* Store items that open a product page */
+a.card__media { display: block; }
+.store__index .row { position: relative; }
+.row__link { position: absolute; inset: 0; }

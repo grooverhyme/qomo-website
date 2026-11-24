@@ -270,7 +270,7 @@
      Background footage: play only while on screen; hold the poster
      frame for visitors who ask for reduced motion
      ------------------------------------------------------------------ */
-  const footage = $$(".realm__bg video, .logo-mask video, .card__media video, .store__index video");
+  const footage = $$(".realm__bg video, .logo-mask video, .card__media video, .store__index video, .pdp-fig video");
   if (footage.length) {
     if (reduce) footage.forEach((v) => { v.removeAttribute("autoplay"); v.pause(); });
     else {
