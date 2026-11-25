@@ -36,7 +36,14 @@
 
   <main>
     <section class="cy-hero" aria-labelledby="cy-title">
-      <img class="cy-hero__bg" src="assets/img/cyano-hero.jpg" alt="" data-parallax="-0.08">
+      <div class="cy-foliage cy-foliage--left" aria-hidden="true"></div>
+      <div class="cy-foliage cy-foliage--right" aria-hidden="true"></div>
+      <div class="cy-line" aria-label="Selected cyanotype prints">
+        <div class="cy-line__rope" aria-hidden="true"></div>
+        <div class="cy-line__viewport"><div class="cy-line__track"></div></div>
+        <button class="cy-line__pause" type="button" aria-label="Pause moving gallery"><span class="lbl">Pause</span> <span class="ico" aria-hidden="true">Ⅱ</span></button>
+      </div>
+      <div class="cy-foliage cy-foliage--front" aria-hidden="true"></div>
       <div class="cy-hero__shade" aria-hidden="true"></div>
       <div class="cy-hero__text">
         <p class="cy-eyebrow reveal">SUn &amp; SKY</p>
@@ -50,37 +57,67 @@
       <small class="cy-hero__fine">© QOMO 2025</small>
     </section>
 
+    <div class="cy-collection">
     <section class="cy-statement" id="process" aria-label="Process">
       <h2 class="reveal">Works exposed beneath the open sky and <em>washed by hand in the garden.</em></h2>
     </section>
 
-    <section class="cy-gallery" id="collection" aria-label="Cyanotype collection" data-lightbox>
-      <article class="cy-print cy-print--1 reveal">
-        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Queen Anne’s Lace I"><img src="assets/img/cyano-01.jpg" alt="Queen Anne’s Lace I" width="512" height="512" loading="lazy"></button>
+    <section class="cy-gallery" id="collection" aria-label="Cyanotype collection">
+      <article class="cy-print cy-print--1 reveal" data-title="Queen Anne’s Lace I" data-year="2025" data-size="24 × 32 cm" data-dimensions="142 × 88 × 12 cm" data-material="Art paper_175 gsm, water colours" data-edition="SPRING COLLECTABLES" data-price="₹ 64.00 – ₹ 348.00" data-w="238" data-h="318">
+        <button class="cy-print__btn" type="button" aria-label="View Queen Anne’s Lace I"><img src="assets/img/cyano-01.jpg" alt="Queen Anne’s Lace I" width="512" height="512" loading="lazy"></button>
         <p class="cy-print__cap"><span class="n">01</span><span class="t">Queen Anne’s Lace I</span><span class="y">2025</span></p>
       </article>
-      <article class="cy-print cy-print--2 reveal">
-        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Fern Study No. 3"><img src="assets/img/cyano-02.jpg" alt="Fern Study No. 3" width="512" height="512" loading="lazy"></button>
+      <article class="cy-print cy-print--2 reveal" data-title="Fern Study No. 3" data-year="2025" data-size="18 × 24 cm" data-dimensions="76 × 54 × 4 cm" data-material="Cotton rag_300 gsm, iron salts" data-edition="GARDEN STUDIES" data-price="₹ 82.00 – ₹ 296.00" data-w="184" data-h="246">
+        <button class="cy-print__btn" type="button" aria-label="View Fern Study No. 3"><img src="assets/img/cyano-02.jpg" alt="Fern Study No. 3" width="512" height="512" loading="lazy"></button>
         <p class="cy-print__cap"><span class="n">02</span><span class="t">Fern Study No. 3</span><span class="y">2025</span></p>
       </article>
-      <article class="cy-print cy-print--3 reveal">
-        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Garden After Rain"><img src="assets/img/cyano-03.jpg" alt="Garden After Rain" width="512" height="512" loading="lazy"></button>
+      <article class="cy-print cy-print--3 reveal" data-title="Garden After Rain" data-year="2024" data-size="30 × 42 cm" data-dimensions="98 × 72 × 5 cm" data-material="Art paper_250 gsm, water colours" data-edition="MONSOON EXPOSURES" data-price="₹ 118.00 – ₹ 420.00" data-w="286" data-h="384">
+        <button class="cy-print__btn" type="button" aria-label="View Garden After Rain"><img src="assets/img/cyano-03.jpg" alt="Garden After Rain" width="512" height="512" loading="lazy"></button>
         <p class="cy-print__cap"><span class="n">03</span><span class="t">Garden After Rain</span><span class="y">2024</span></p>
       </article>
-      <article class="cy-print cy-print--4 reveal">
-        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Wild Grasses"><img src="assets/img/cyano-04.jpg" alt="Wild Grasses" width="512" height="512" loading="lazy"></button>
+      <article class="cy-print cy-print--4 reveal" data-title="Wild Grasses" data-year="2025" data-size="21 × 29.7 cm" data-dimensions="84 × 60 × 3 cm" data-material="Cotton paper_220 gsm, iron salts" data-edition="FIELD NOTES" data-price="₹ 74.00 – ₹ 310.00" data-w="212" data-h="300">
+        <button class="cy-print__btn" type="button" aria-label="View Wild Grasses"><img src="assets/img/cyano-04.jpg" alt="Wild Grasses" width="512" height="512" loading="lazy"></button>
         <p class="cy-print__cap"><span class="n">04</span><span class="t">Wild Grasses</span><span class="y">2025</span></p>
       </article>
-      <article class="cy-print cy-print--5 reveal">
-        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Cosmos, Late August"><img src="assets/img/cyano-05.jpg" alt="Cosmos, Late August" width="512" height="512" loading="lazy"></button>
+      <article class="cy-print cy-print--5 reveal" data-title="Cosmos, Late August" data-year="2024" data-size="20 × 20 cm" data-dimensions="64 × 64 × 4 cm" data-material="Art paper_175 gsm, water colours" data-edition="LATE SUMMER" data-price="₹ 64.00 – ₹ 248.00" data-w="224" data-h="224">
+        <button class="cy-print__btn" type="button" aria-label="View Cosmos, Late August"><img src="assets/img/cyano-05.jpg" alt="Cosmos, Late August" width="512" height="512" loading="lazy"></button>
         <p class="cy-print__cap"><span class="n">05</span><span class="t">Cosmos, Late August</span><span class="y">2024</span></p>
       </article>
-      <article class="cy-print cy-print--6 reveal">
-        <button class="cy-print__btn" type="button" data-lb-item aria-label="View Meadow Fragment II"><img src="assets/img/cyano-06.jpg" alt="Meadow Fragment II" width="512" height="512" loading="lazy"></button>
+      <article class="cy-print cy-print--6 reveal" data-title="Meadow Fragment II" data-year="2025" data-size="25 × 35 cm" data-dimensions="112 × 78 × 6 cm" data-material="Cotton rag_300 gsm, iron salts" data-edition="MEADOW FRAGMENTS" data-price="₹ 96.00 – ₹ 348.00" data-w="252" data-h="350">
+        <button class="cy-print__btn" type="button" aria-label="View Meadow Fragment II"><img src="assets/img/cyano-06.jpg" alt="Meadow Fragment II" width="512" height="512" loading="lazy"></button>
         <p class="cy-print__cap"><span class="n">06</span><span class="t">Meadow Fragment II</span><span class="y">2025</span></p>
       </article>
     </section>
+    </div>
+
+    <!-- Hover focus: project information (from the cyanotype app) -->
+    <div class="cy-info" aria-live="polite">
+      <div class="cy-info__head"><p>QOMO / <span data-f="title"></span></p><p>Project information</p></div>
+      <dl>
+        <div><dt>Year</dt><dd data-f="year"></dd></div>
+        <div><dt>Dimensions</dt><dd><span data-f="dimensions"></span><small>H × W × D</small></dd></div>
+        <div><dt>Material</dt><dd data-f="material"></dd></div>
+        <div><dt>Edition</dt><dd data-f="edition"></dd></div>
+        <div><dt>Price</dt><dd><span data-f="price"></span><small>Shipping calculated separately</small></dd></div>
+      </dl>
+    </div>
   </main>
+
+  <!-- Print detail view (from the cyanotype app) -->
+  <div class="cy-modal" id="cy-modal" role="dialog" aria-modal="true" aria-labelledby="cy-modal-title" hidden>
+    <button class="cy-modal__close" type="button">Close</button>
+    <div class="cy-modal__art"><div class="cy-modal__print"><img src="" alt=""></div></div>
+    <div class="cy-modal__details">
+      <p class="cy-modal__kicker">QOMO / Original cyanotype</p>
+      <h2 id="cy-modal-title" data-f="title"></h2>
+      <dl>
+        <div><dt>Year</dt><dd data-f="year"></dd></div>
+        <div><dt>Size</dt><dd data-f="size"></dd></div>
+        <div><dt>Paper</dt><dd>Cotton rag, 300 gsm</dd></div>
+      </dl>
+      <a href="mailto:studio@qomo.art">Enquire about this work →</a>
+    </div>
+  </div>
 
   <div data-include="mega" data-variant="grass"></div>
   <div data-include="footer"></div>

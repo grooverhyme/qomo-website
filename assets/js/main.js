@@ -231,6 +231,157 @@
   }
 
   /* ------------------------------------------------------------------
+     Cyanotype — motion ported from the cyanotype app:
+     washing line, swaying foliage, hover focus, print detail view
+     ------------------------------------------------------------------ */
+  const cyPrints = $$(".cy-print[data-title]");
+  if (cyPrints.length) {
+    // absolute URLs: a url() inside a custom property resolves against the stylesheet, not the page
+    const works = cyPrints.map((a) => ({ ...a.dataset, img: new URL($("img", a).getAttribute("src"), location.href).href }));
+    const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+    const fill = (root, w) => $$("[data-f]", root).forEach((el) => { el.textContent = w[el.dataset.f] || ""; });
+
+    // Detail view
+    const modal = $("#cy-modal");
+    let modalOpener = null;
+    const openWork = (i, from) => {
+      if (!modal) return;
+      const w = works[i];
+      fill(modal, w);
+      const im = $(".cy-modal__print img", modal);
+      im.src = w.img; im.alt = w.title;
+      modalOpener = from || null;
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+      $(".cy-modal__close", modal).focus();
+    };
+    const closeWork = () => {
+      if (!modal || modal.hidden) return;
+      modal.hidden = true;
+      document.body.classList.remove("modal-open");
+      if (modalOpener) modalOpener.focus({ preventScroll: true });
+    };
+    if (modal) {
+      $(".cy-modal__close", modal).addEventListener("click", closeWork);
+      addEventListener("keydown", (e) => { if (e.key === "Escape") closeWork(); });
+    }
+    cyPrints.forEach((a, i) => $(".cy-print__btn", a).addEventListener("click", (e) => openWork(i, e.currentTarget)));
+
+    // Hover focus + project information (only where hover exists)
+    const collection = $(".cy-collection");
+    const info = $(".cy-info");
+    if (collection && info && finePointer) {
+      const on = (a, i) => {
+        cyPrints.forEach((p) => p.classList.toggle("is-active", p === a));
+        collection.classList.add("has-hover");
+        fill(info, works[i]);
+        info.classList.add("is-visible");
+      };
+      const off = () => {
+        collection.classList.remove("has-hover");
+        cyPrints.forEach((p) => p.classList.remove("is-active"));
+        info.classList.remove("is-visible");
+      };
+      cyPrints.forEach((a, i) => {
+        a.addEventListener("mouseenter", () => on(a, i));
+        a.addEventListener("mouseleave", off);
+        a.addEventListener("focusin", () => on(a, i));
+        a.addEventListener("focusout", off);
+      });
+    }
+
+    // Hero: foliage follows the pointer
+    const hero = $(".cy-hero");
+    if (hero && finePointer && !reduce) {
+      hero.addEventListener("pointermove", (e) => {
+        const x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
+        const set = (k, v) => hero.style.setProperty(k, `${v.toFixed(2)}px`);
+        set("--mx", x * 10); set("--my", y * 5); set("--ml", x * -2.5); set("--mr", x * 2);
+        set("--mf", x * -4.5); set("--msy", y * 3); set("--mfy", y * -2);
+      });
+    }
+
+    // Washing line: pegged prints drift, can be dragged, scrolled sideways or paused
+    const line = $(".cy-line");
+    if (line) {
+      const track = $(".cy-line__track", line);
+      const vp = $(".cy-line__viewport", line);
+      const pauseBtn = $(".cy-line__pause", line);
+      const peg = (w, i) => {
+        const h = +w.h;
+        const hs = h >= 350 ? 1.045 : h >= 300 ? 1.075 : 1.11;
+        return `<button class="cy-peg" type="button" data-i="${i}" aria-label="View ${esc(w.title)}" style="--w:${w.w}px;--h:${h}px;--hs:${hs};--art:url('${w.img}')">` +
+          `<span class="cy-clip cy-clip--l" aria-hidden="true"><i></i></span><span class="cy-clip cy-clip--r" aria-hidden="true"><i></i></span>` +
+          `<span class="cy-peg__art" aria-hidden="true"></span><span class="cy-peg__label" aria-hidden="true">${esc(w.title)}</span></button>`;
+      };
+      // two copies for a seamless loop; the copy is hidden from assistive tech
+      track.innerHTML = works.map(peg).join("") + works.map(peg).join("");
+      $$(".cy-peg", track).slice(works.length).forEach((b) => { b.tabIndex = -1; b.setAttribute("aria-hidden", "true"); });
+
+      let offset = 0, ready = false, paused = reduce, dragging = false, moved = false, startX = 0, startOff = 0, visible = true, raf = 0;
+      const scale = () => (innerWidth < 768 ? 0.77 : 1);
+      const span = () => (track.scrollWidth / 2) * scale();
+      const wrap = () => {
+        const half = span();
+        if (!half) return;
+        if (!ready) { offset = -half; ready = true; }
+        while (offset > 0) offset -= half;
+        while (offset < -half) offset += half;
+      };
+      const render = () => { track.style.transform = `translate3d(${offset.toFixed(2)}px,0,0) scale(${scale()})`; };
+      const tick = () => {
+        wrap();
+        if (!paused && !dragging) offset += 0.28;
+        render();
+        raf = visible ? requestAnimationFrame(tick) : 0;
+      };
+      const start = () => { if (!raf) raf = requestAnimationFrame(tick); };
+      new IntersectionObserver(([en]) => { visible = en.isIntersecting; if (visible) start(); }, { threshold: 0 }).observe(line);
+      start();
+
+      const setPaused = (p) => {
+        paused = p;
+        $(".lbl", pauseBtn).textContent = p ? "Play" : "Pause";
+        $(".ico", pauseBtn).textContent = p ? "→" : "Ⅱ";
+        pauseBtn.setAttribute("aria-label", p ? "Resume moving gallery" : "Pause moving gallery");
+      };
+      setPaused(paused);
+      pauseBtn.addEventListener("click", () => setPaused(!paused));
+
+      vp.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0) return;
+        dragging = true; moved = false; startX = e.clientX; startOff = offset;
+        vp.classList.add("is-dragging");
+      });
+      vp.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const d = e.clientX - startX;
+        if (Math.abs(d) > 4 && !moved) { moved = true; vp.setPointerCapture(e.pointerId); }
+        if (moved) offset = startOff + d;
+      });
+      const endDrag = () => {
+        if (!dragging) return;
+        dragging = false; vp.classList.remove("is-dragging");
+        setTimeout(() => { moved = false; }, 80);
+      };
+      vp.addEventListener("pointerup", endDrag);
+      vp.addEventListener("pointercancel", endDrag);
+      vp.addEventListener("wheel", (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) || e.shiftKey) {
+          e.preventDefault();
+          offset -= e.deltaX || e.deltaY;
+          if (reduce) render();
+        }
+      }, { passive: false });
+      track.addEventListener("click", (e) => {
+        const b = e.target.closest(".cy-peg");
+        if (!b || moved) return;
+        openWork(+b.dataset.i, b);
+      });
+    }
+  }
+
+  /* ------------------------------------------------------------------
      Cursor follower
      ------------------------------------------------------------------ */
   if (finePointer && !reduce) {

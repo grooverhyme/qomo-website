@@ -862,14 +862,31 @@ a.card__media { display: block; }
 .cy-pill--solid { background: var(--cy-paper); color: var(--cy-ink); }
 .cy-pill--solid:hover { background: transparent; color: var(--cy-paper); border-color: rgba(245, 242, 223, .6); }
 
-/* Hero */
+/* Hero — garden backdrop, swaying foliage, washing line (motion from the cyanotype app) */
 .cy-hero {
-  position: relative; overflow: hidden; display: flex; align-items: flex-end;
-  min-height: clamp(560px, 56.3vw, 100svh); color: var(--cy-paper);
+  --backdrop: url("../img/cyano-hero.jpg");
+  --mx: 0px; --my: 0px; --ml: 0px; --mr: 0px; --mf: 0px; --msy: 0px; --mfy: 0px;
+  position: relative; overflow: hidden; isolation: isolate; display: flex; align-items: flex-end;
+  height: 100svh; min-height: 650px; color: var(--cy-paper);
+  background: var(--backdrop) center / cover no-repeat;
 }
-.cy-hero__bg { position: absolute; left: 0; top: -6%; width: 100%; height: 112%; object-fit: cover; }
+.cy-foliage {
+  position: absolute; inset: -8px; z-index: 1; pointer-events: none;
+  background: var(--backdrop) center / cover no-repeat;
+  transform-origin: 50% 100%; will-change: transform;
+}
+.cy-foliage--left { clip-path: polygon(0 7%, 18% 9%, 23% 35%, 18% 61%, 31% 100%, 0 100%); animation: cy-sway-l 8s ease-in-out infinite alternate; }
+.cy-foliage--right { clip-path: polygon(76% 10%, 100% 5%, 100% 100%, 69% 100%, 82% 56%); animation: cy-sway-r 10s ease-in-out -3s infinite alternate; }
+.cy-foliage--front {
+  z-index: 4; filter: brightness(.96);
+  clip-path: polygon(0 79%, 14% 72%, 30% 87%, 45% 76%, 61% 89%, 79% 72%, 100% 82%, 100% 100%, 0 100%);
+  animation: cy-sway-f 6.5s ease-in-out -1.5s infinite alternate;
+}
+@keyframes cy-sway-l { from { transform: translate3d(var(--ml), var(--my), 0) rotate(-.18deg) scale(1.008); } to { transform: translate3d(calc(var(--ml) + 3px), var(--my), 0) rotate(.28deg) scale(1.008); } }
+@keyframes cy-sway-r { from { transform: translate3d(var(--mr), var(--msy), 0) rotate(.15deg) scale(1.006); } to { transform: translate3d(calc(var(--mr) - 4px), var(--msy), 0) rotate(-.3deg) scale(1.006); } }
+@keyframes cy-sway-f { from { transform: translate3d(var(--mf), var(--mfy), 0) rotate(-.12deg) scale(1.012); } to { transform: translate3d(calc(var(--mf) + 5px), var(--mfy), 0) rotate(.22deg) scale(1.012); } }
 .cy-hero__shade {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
   background:
     linear-gradient(180deg, rgba(245, 243, 224, .23) 0%, rgba(245, 243, 224, 0) 29%),
     linear-gradient(0deg, rgba(15, 34, 24, .42) 0%, rgba(15, 34, 24, 0) 43%),
@@ -877,9 +894,78 @@ a.card__media { display: block; }
     rgba(0, 0, 0, .19);
 }
 .cy-hero__text {
-  position: relative; width: 100%; max-width: 662px;
+  position: relative; z-index: 5; width: 100%; max-width: 662px; pointer-events: none;
   padding: 0 var(--gutter) clamp(64px, 5.6vw, 72px) clamp(20px, 5.9vw, 75px);
 }
+.cy-hero__text a { pointer-events: auto; }
+.cy-hero__fine { z-index: 5; }
+
+/* Washing line */
+.cy-line { position: absolute; z-index: 2; left: 0; top: calc(var(--header-h) + 2vh); width: 100%; height: 51vh; min-height: 360px; }
+.cy-line__rope {
+  position: absolute; top: 45px; left: -2%; width: 104%; height: 2px;
+  background: linear-gradient(90deg, #68563b, #9e8b65 30%, #5e5036); box-shadow: 0 1px rgba(245, 235, 201, .25);
+  transform: rotate(-.15deg);
+}
+.cy-line__viewport {
+  width: 100%; height: 100%; overflow: hidden; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.cy-line__viewport.is-dragging { cursor: grabbing; }
+.cy-line__track {
+  display: flex; align-items: flex-start; width: max-content; height: 100%;
+  gap: clamp(70px, 8vw, 140px); padding: 45px 70px 0; transform-origin: 0 0; will-change: transform;
+}
+.cy-peg {
+  position: relative; flex: none; width: var(--w); height: var(--h); background: #d8d3c2;
+  box-shadow: 3px 10px 24px rgba(12, 28, 18, .26), 0 1px 2px rgba(255, 255, 255, .35);
+  transform-origin: 50% 0; transition: filter .3s, transform .45s cubic-bezier(.2, .8, .2, 1);
+  animation: cy-paper 6s ease-in-out infinite alternate;
+}
+.cy-peg:nth-child(3n + 2) { animation-delay: -2.6s; }
+.cy-peg:nth-child(3n + 3) { animation-delay: -4.1s; }
+@keyframes cy-paper { from { rotate: -.65deg; } to { rotate: .65deg; } }
+.cy-peg:hover { z-index: 6; filter: brightness(1.035) saturate(1.04); transform: scale(var(--hs, 1.08)); }
+.cy-peg__art {
+  position: absolute; inset: 0; overflow: hidden; background: var(--art) center / cover no-repeat;
+  box-shadow: inset 0 0 20px rgba(35, 29, 18, .08), inset 0 0 0 1px rgba(77, 66, 47, .12);
+}
+.cy-peg__art::after {
+  content: ""; position: absolute; inset: 0; opacity: .12; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+}
+.cy-clip {
+  position: absolute; z-index: 2; top: -21px; width: 13px; height: 43px; border-radius: 3px 3px 2px 2px;
+  background:
+    linear-gradient(100deg, transparent 0 42%, rgba(55, 37, 15, .5) 43% 48%, transparent 49%),
+    linear-gradient(90deg, #6d4c27, #c69b5b 18%, #e0bd7f 45%, #8b6336 79%, #5c3e20);
+  box-shadow: 2px 3px 4px rgba(20, 20, 10, .42), inset 1px 0 rgba(255, 231, 178, .35), inset -1px 0 rgba(48, 30, 13, .35);
+}
+.cy-clip::before { content: ""; position: absolute; top: -3px; left: 2px; width: 9px; height: 7px; border: 1px solid rgba(49, 42, 29, .8); border-bottom: 0; border-radius: 5px 5px 0 0; }
+.cy-clip::after { content: ""; position: absolute; top: 17px; left: -2px; width: 17px; height: 5px; border-top: 1px solid #4e402c; border-bottom: 1px solid rgba(236, 202, 142, .45); transform: rotate(-5deg); }
+.cy-clip i { position: absolute; top: 14px; left: 4px; width: 6px; height: 10px; border: 1px solid #403b31; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(225, 218, 190, .35); }
+.cy-clip--l { left: 17%; transform: rotate(-2deg); }
+.cy-clip--r { right: 17%; transform: rotate(3deg); }
+.cy-peg__label {
+  position: absolute; left: 0; right: 0; bottom: -23px; text-align: center; opacity: 0; transition: opacity .3s;
+  font-family: "Outfit", var(--font); font-weight: 400; font-size: 9px; letter-spacing: .06em; text-transform: uppercase; color: rgba(245, 243, 226, .82);
+}
+.cy-peg:hover .cy-peg__label, .cy-peg:focus-visible .cy-peg__label { opacity: 1; }
+.cy-line__pause {
+  position: absolute; right: 32px; bottom: -6px; display: flex; align-items: center; gap: 10px;
+  font-family: "Outfit", var(--font); font-weight: 400; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: rgba(248, 245, 229, .84);
+}
+.cy-line__pause .ico { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid rgba(248, 245, 229, .5); border-radius: 50%; transition: background .3s, color .3s; }
+.cy-line__pause:hover .ico { background: var(--cy-paper); color: var(--cy-ink); }
+@media (max-width: 767px) {
+  .cy-hero { min-height: 620px; }
+  .cy-line { height: 48vh; }
+  .cy-line__rope { top: 33px; }
+  .cy-line__track { gap: 54px; padding: 33px 30px 0; }
+  .cy-line__pause { right: 20px; bottom: 10px; }
+}
+
 .cy-eyebrow { padding-left: 4px; font-size: 9px; line-height: 13.5px; letter-spacing: .18em; }
 .cy-hero h1 { padding-top: 7px; font-weight: 200; font-size: clamp(54px, 5.9vw, 76px); line-height: .78; letter-spacing: -.075em; }
 .cy-hero h1 span { display: block; }
@@ -951,6 +1037,67 @@ a.card__media { display: block; }
 .cy-index__foot { display: flex; gap: 30px; font-weight: 400; font-size: 11px; line-height: 16.5px; }
 .cy-index__foot a { text-decoration: underline; text-underline-offset: 2px; }
 body.index-open { overflow: hidden; }
+.cy-index__nav:hover a { opacity: .28; }
+.cy-index__nav a:hover { opacity: 1; transform: translateX(20px); }
+
+/* Hover focus — other works blur while one is in focus (fine pointers) */
+.cy-statement, .cy-print { transition: filter .55s cubic-bezier(.2, .8, .2, 1), opacity .55s, transform .55s cubic-bezier(.2, .8, .2, 1); }
+.cy-collection.has-hover .cy-statement,
+.cy-collection.has-hover .cy-print:not(.is-active) { filter: blur(12px); opacity: .26; }
+.cy-collection.has-hover .cy-print.is-active { z-index: 10; transform: scale(1.02); }
+.cy-info {
+  position: fixed; z-index: 30; right: 24px; bottom: 24px; width: min(650px, calc(100vw - 48px));
+  padding: 0 18px 8px; background: rgba(248, 248, 244, .95); box-shadow: 0 20px 80px rgba(25, 30, 26, .16);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  opacity: 0; transform: translateY(20px); pointer-events: none; visibility: hidden;
+  transition: opacity .35s, transform .45s cubic-bezier(.2, .8, .2, 1), visibility 0s .45s;
+}
+.cy-info.is-visible { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+.cy-info__head { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--ink-18); }
+.cy-info__head p, .cy-info dt { font-family: "Outfit", var(--font); font-weight: 400; font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-85); }
+.cy-info dl { margin: 0; }
+.cy-info dl > div { display: grid; grid-template-columns: 36% 64%; align-items: center; min-height: 64px; border-bottom: 1px solid var(--ink-18); }
+.cy-info dl > div:last-child { border-bottom: 0; }
+.cy-info dt { color: var(--ink-55); }
+.cy-info dd { margin: 0; font-family: "Outfit", var(--font); font-weight: 400; font-size: 13px; color: var(--ink-85); }
+.cy-info small { display: block; margin-top: 2px; font-size: 9px; color: var(--ink-55); }
+
+/* Print detail view */
+.cy-modal {
+  position: fixed; z-index: 160; inset: 0; display: grid; grid-template-columns: 58% 42%;
+  color: #13291c; background: #ebe8d9; animation: cy-modal-in .55s cubic-bezier(.7, 0, .2, 1);
+}
+.cy-modal[hidden] { display: none; }
+@keyframes cy-modal-in { from { opacity: 0; transform: translateY(3%); } }
+.cy-modal__close {
+  position: absolute; z-index: 2; top: 26px; right: 32px; padding: 11px 18px; border: 1px solid #647066; border-radius: 999px;
+  font-family: "Outfit", var(--font); font-weight: 400; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; transition: background .3s, color .3s;
+}
+.cy-modal__close:hover { background: #13291c; color: #ebe8d9; }
+.cy-modal__art { display: grid; place-items: center; padding: 7vh 7vw; background: #d4d6ca; }
+.cy-modal__print { width: min(400px, 72%); aspect-ratio: .72; border: 12px solid #eee9d5; box-shadow: 8px 16px 40px rgba(20, 36, 25, .2); overflow: hidden; }
+.cy-modal__print img { width: 100%; height: 100%; object-fit: cover; }
+.cy-modal__details { display: flex; flex-direction: column; justify-content: center; padding: 13vh 7vw 8vh; }
+.cy-modal__kicker { margin-bottom: 24px; font-family: "Outfit", var(--font); font-weight: 400; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
+.cy-modal h2 { margin-bottom: 8vh; font-weight: 200; font-size: clamp(45px, 5.5vw, 88px); line-height: .92; letter-spacing: -.065em; }
+.cy-modal dl { margin: 0; border-top: 1px solid #aeb5aa; }
+.cy-modal dl div { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #aeb5aa; font-family: "Outfit", var(--font); font-weight: 400; font-size: 11px; }
+.cy-modal dd { margin: 0; }
+.cy-modal__details > a { width: fit-content; margin-top: 36px; font-family: "Outfit", var(--font); font-weight: 400; font-size: 11px; text-decoration: underline; text-underline-offset: 3px; }
+.cy-modal__details > a:hover { color: var(--cy-blue); }
+body.modal-open { overflow: hidden; }
+@media (max-width: 767px) {
+  .cy-modal { grid-template-columns: 1fr; grid-template-rows: 55% auto; overflow-y: auto; }
+  .cy-modal__art { padding: 70px 25px 25px; }
+  .cy-modal__print { width: auto; height: 100%; }
+  .cy-modal__details { padding: 32px 25px; }
+  .cy-modal h2 { margin-bottom: 28px; font-size: 44px; }
+  .cy-modal__kicker { margin-bottom: 12px; }
+  .cy-modal__details > a { margin: 25px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cy-peg, .cy-foliage { animation: none; }
+}
 
 /* Kalā — Sun & Sky realm opens the cyanotype page */
 .realm h2 a { transition: color .4s var(--ease); }
